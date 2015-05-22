@@ -39,7 +39,7 @@ do_install_append() {
 
 FILES_${PN}  = "${SRC_DIR}/hello.app.src"
 FILES_${PN} += "${SRC_DIR}/hello.erl"
-FILES_${PN}  = "${EBIN_DIR}/hello.app"
+FILES_${PN} += "${EBIN_DIR}/hello.app"
 FILES_${PN} += "${EBIN_DIR}/hello.beam"
 FILES_${PN} += "${CONF_DIR}/hello.config"
 FILES_${PN} += "${sysconfdir}/init.d/hello.otp.system"
