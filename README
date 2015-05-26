@@ -9,38 +9,30 @@ Dependencies
 
 This layer depends on:
 
-  URI: git://git.openembedded.org/bitbake
+  URI: git://git.yoctoproject.org/poky
+  layers: meta meta-yocto meta-yocto-bsp
+  branch: daisy
+
+  URI: git://github.com/joaohf/meta-erlang.git
+  layers: meta-erlang
   branch: master
-
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
-  branch: master
-
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
-  branch: master
-
-
-Patches
-=======
-
-Please submit any patches against the hello layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
-
 
 Table of Contents
 =================
 
   I. Adding the hello layer to your build
- II. Misc
+ II. Building and running the image
 
 
 I. Adding the hello layer to your build
 =================================================
 
---- replace with specific instructions for the hello layer ---
+git clone git://git.yoctoproject.org/poky
+cd poky
+git clone git://github.com/joaohf/meta-erlang.git
+git clone git://github.com/egcrowe/meta-hello.git
+
+source oe-init-build-env /path/to/build/directory
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -54,11 +46,17 @@ other layers needed. e.g.:
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-hello \
+    /path/to/yocto/meta-erlang \
+    /path/to/meta-hello \
     "
 
+Select the target machine in conf/local.conf, i.e.
 
-II. Misc
-========
+MACHINE ?= "qemuarm"
 
---- replace with specific information about the hello layer ---
+II. Building and running the image
+==================================
+
+bitbake core-image-full-cmdline-hello
+
+runqemu qemuarm core-image-full-cmdline-hello
