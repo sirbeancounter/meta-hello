@@ -1,0 +1,33 @@
+From ce80592c31d25ed4329fc3ea7ab2a1d6c09e20b0 Mon Sep 17 00:00:00 2001
+From: Graham Crowe <graham.crowe@ericsson.com>
+Date: Wed, 27 May 2015 10:27:56 +0200
+Subject: [PATCH 2/2] Update hello.start.in to use heelo.boot
+
+---
+ sys/hello.start.in | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/sys/hello.start.in b/sys/hello.start.in
+index f797689..19ec787 100755
+--- a/sys/hello.start.in
++++ b/sys/hello.start.in
+@@ -3,12 +3,14 @@
+ #
+ PIPE_DIR=/tmp/start/
+ ERLANG_LOGDIR=/tmp/start
+-BINDIR=/usr/lib/erlang/erts-@ERLANG_ERTS_VER@/bin
++ROOTDIR=/usr/lib/erlang
++BINDIR=$ROOTDIR/erts-@ERLANG_ERTS_VER@/bin
++LIBDIR=$ROOTDIR/lib
+ 
+ mkdir -p $ERLANG_LOGDIR
+ 
+ run_cmd="$BINDIR/erl\
+-        -boot $BINDIR/start\
++        -boot $LIBDIR/hello-*/ebin\
+         -config /etc/hello.d/hello\
+         -sname hello\
+         -setcookie helloworld\
+-- 
+1.9.1
+
