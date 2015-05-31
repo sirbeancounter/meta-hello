@@ -28,7 +28,9 @@ I. Adding the hello layer to your build
 =================================================
 
 git clone git://git.yoctoproject.org/poky
-cd poky
+cd poky ; git checkout daisy
+git clone git://github.com/agherzan/meta-raspberrypi.git
+cd meta-raspberrypi ; git checkout daisy ; cd -
 git clone git://github.com/joaohf/meta-erlang.git
 git clone git://github.com/egcrowe/meta-hello.git
 
@@ -46,6 +48,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
+    /path/to/yocto/meta-raspeberrypi \
     /path/to/yocto/meta-erlang \
     /path/to/meta-hello \
     "
@@ -53,10 +56,16 @@ other layers needed. e.g.:
 Select the target machine in conf/local.conf, i.e.
 
 MACHINE ?= "qemuarm"
+MACHINE ?= "raspberrypi"
 
 II. Building and running the image
 ==================================
 
-bitbake core-image-full-cmdline-hello
+("qemuarm")
+bitbake core-image-full-cmdline
+runqemu qemuarm core-image-full-cmdline
 
-runqemu qemuarm core-image-full-cmdline-hello
+("raspberrypi", where "mmcblk0" is sd card device)
+bitbake rpi-basic-image
+cd tmp/deploy/images/raspberrypi
+sudo dd if=rpi-basic-image-raspberrypi.rpi-sdimg of=/dev/mmcblk0
