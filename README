@@ -48,7 +48,7 @@ other layers needed. e.g.:
     /path/to/yocto/meta \
     /path/to/yocto/meta-yocto \
     /path/to/yocto/meta-yocto-bsp \
-    /path/to/yocto/meta-raspeberrypi \
+    /path/to/yocto/meta-raspberrypi \
     /path/to/yocto/meta-erlang \
     /path/to/meta-hello \
     "
